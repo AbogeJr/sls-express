@@ -1,0 +1,25 @@
+org: aboge
+app: expsan
+service: exps
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: "*"
+
+package:
+  patterns:
+    - "!node_modules/.prisma/client/libquery_engine-*"
+    - "node_modules/.prisma/client/libquery_engine-rhel-*"
+    - "!node_modules/prisma/libquery_engine-*"
+    - "!node_modules/@prisma/engines/**"
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
